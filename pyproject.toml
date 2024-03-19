@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "nonebot-plugin-HelpWithPic"
+version = "1.0"
+description = "nonebot插件-动态帮助图片制作"
+
+[build-system]
+requires = [
+    "pil_utils",
+    "pillow",
+    "nonebot-plugin-saa"
+]
+build-backend = "setuptools.build_meta"

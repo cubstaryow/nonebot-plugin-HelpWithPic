@@ -12,12 +12,12 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 
 
 <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/owner/nonebot-plugin-HelpWithPic.svg" alt="license">
+    <img src="https://img.shields.io/github/license/cubstaryow/nonebot-plugin-HelpWithPic.svg" alt="license">
 </a>
 <a href="https://pypi.python.org/pypi/nonebot-plugin-HelpWithPic">
     <img src="https://img.shields.io/pypi/v/nonebot-plugin-HelpWithPic.svg" alt="pypi">
 </a>
-<img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="python">
+<img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="python">
 
 </div>
 
@@ -72,7 +72,7 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 
 打开 nonebot2 项目根目录下的 `pyproject.toml` 文件, 在 `[tool.nonebot]` 部分追加写入
 
-    plugins = ["nonebot_plugin_template"]
+    plugins = ["nonebot_plugin_HelpWithPic"]
 
 </details>
 
