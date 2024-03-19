@@ -37,6 +37,8 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 
 ## 💿 安装
 
+暂时未完成上传PYPI，目前只能下载源码使用。
+
 <details open>
 <summary>使用 nb-cli 安装</summary>
 在 nonebot2 项目的根目录下打开命令行, 输入以下指令即可安装
