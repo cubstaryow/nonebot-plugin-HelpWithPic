@@ -1,12 +1,26 @@
-[tool.poetry]
+[project]
 name = "nonebot-plugin-HelpWithPic"
 version = "1.0"
 description = "nonebot插件-动态帮助图片制作"
-
-[build-system]
-requires = [
-    "pil_utils",
-    "pillow",
-    "nonebot-plugin-saa"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+keywords = ["egg", "bacon", "sausage", "tomatoes", "Lobster Thermidor"]
+authors = [
+  {email = "cub_staryow@outlook.com"},
+  {name = "cubstaryow"}
 ]
-build-backend = "setuptools.build_meta"
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+dependencies = [
+  "httpx",
+  "nonebot_plugin_saa",
+  "pil_utils",
+  "pillow"
+]
+
+[project.urls]
+repository = "https://github.com/cubstaryow/nonebot-plugin-HelpWithPic"
