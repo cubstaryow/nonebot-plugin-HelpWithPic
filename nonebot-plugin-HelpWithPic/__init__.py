@@ -33,7 +33,7 @@ helppic = on_regex(
 
 
 @add_cmd.handle()
-async def hwp_rc(
+async def HWP_rc(
         #matcher: Matcher,
         data: list = CommandArg()
 ):
@@ -59,7 +59,7 @@ async def hwp_rc(
     await msg_builder.send()
 
 @del_cmd.handle()
-async def hwp_dc(
+async def HWP_dc(
     #matcher: Matcher,
     data: list = CommandArg()
         
@@ -69,9 +69,9 @@ async def hwp_dc(
         command=command
     )
     if ret != "NotFound":
-       msg = f"[hwp-I]词条已删除\n>{command}"
+       msg = f"[HWP-I]词条已删除\n>{command}"
     else:
-        msg = f"[hwp-E]词条未找到"
+        msg = f"[HWP-E]词条未找到"
     msg_builder = MessageFactory([
         Text(msg)
     ])
@@ -79,7 +79,7 @@ async def hwp_dc(
 
 
 @helppic.handle()
-async def hwp_mb(
+async def HWP_mb(
         bot: Bot,
         event: MessageEvent,
         #matcher: Matcher,
@@ -91,15 +91,15 @@ async def hwp_mb(
     #    logger.exception("获取消息中附带图片失败，回退到默认行为")
     user = await bot.get_stranger_info(user_id=event.self_id, no_cache=False)
     data = format_data()
-    #try:
-    if 1 :
+    try:
+
         ret = await get_help_pic(data=data,user=user,bg_arg=pic)
         msg_builder = MessageFactory([
             Image(ret)
         ])
-    #except Exception:
-    #    msg_builder = MessageFactory([
-    #        Text("[hwp-E]出错了,请查看控制台")])
+    except Exception:
+        msg_builder = MessageFactory([
+            Text("[HWP-E]出错了,请查看控制台")])
     await msg_builder.send()
     await helppic.finish()
 

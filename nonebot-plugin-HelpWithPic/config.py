@@ -14,7 +14,7 @@ class config_hwp(BaseModel):
     hwp_commandstart :str = "#"
     hwp_nickname:str ="幼龙云V4的帮助文档"
     hwp_text:str =  "你想要的,我们都没有(不是\n不知道写啥了"
-    hwp_version:str="HelpWithPic-Beta1.2"
+    hwp_version:str="HelpWithPic-Beta1.2.1"
 
 config: config_hwp = config_hwp.parse_obj(get_driver().config.dict())
 #本插件由 cubstaryow 编写

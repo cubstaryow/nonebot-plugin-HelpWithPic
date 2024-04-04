@@ -90,7 +90,7 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 | HWP_commandstart | 否 | "#" | 自定义命令头 |
 | HWP_nickname | 否 | "本bot的帮助文档" | 标题 |
 | HWP_text | 否 | "你想要的,我们都没有(不是\n这是描述" | 描述 |
-| HWP_version | 否 | "HelpWithPic-Beta1.2"  | 插件版本 |
+| HWP_version | 否 | "HelpWithPic-Betaxxx"  | 插件版本 |
 
 ## 🎉 使用
 ### 指令表
