@@ -46,7 +46,7 @@ async def hwp_rc(
             cdatal[1] = ""
         if len(cdatal) < 3:
             cdatal[2] = "unknow"
-        ret = addhwp(
+        ret = addHWP(
             command=cdatal[0].strip(),
             text=cdatal[1].strip(),
             perm=cdatal[2].strip()
@@ -65,7 +65,7 @@ async def hwp_dc(
         
 ):
     command = str(data[1]).strip()
-    ret = delhwp(
+    ret = delHWP(
         command=command
     )
     if ret != "NotFound":
