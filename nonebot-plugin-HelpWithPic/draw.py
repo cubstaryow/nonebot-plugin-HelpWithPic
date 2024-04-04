@@ -15,13 +15,13 @@ GRAY_BG_COLOR: str = "#aaaaaaaa"
 WHITE_BG_COLOR = (255, 255, 255, 150)
 WHITE_MASK_COLOR = (255, 255, 255, 125)
 
-FONT_PATH =  config.ps_font or str(get_proper_font("国").path.resolve())
+FONT_PATH =  config.hwp_font or str(get_proper_font("国").path.resolve())
 #"./util/resource/font/Rajdhani-zihun-Medium.ttf" or
 
-nick = config.HWP_nickname
-text =  config.HWP_text
-cs = config.HWP_commandstart
-plugin_version = config.plugin_version
+nick = config.hwp_nickname
+text =  config.hwp_text
+cs = config.hwp_commandstart
+hwp_version = config.hwp_version
 
 version = config.version
 
@@ -175,28 +175,19 @@ async def make_command_card(
 
 
 async def get_bg(pic: Optional[Union[bytes, Image.Image]] = None) -> Image.Image:
-    #if isinstance(pic, Image.Image):
-    #    return pic
-    #if isinstance(pic, bytes):
-    #    try:
-    #        return Image.open(BytesIO(pic))
-    #    except Exception:
-    #        logger.exception("打开用户自定义背景图失败，弃用")
-    #        pic = None
-    #try:
-    #    url = await bing_dayimg()
-    #    resp = await api_get_img(url)
-    #    return Image.open( BytesIO(resp) )
-    #except:
-    #    logger.exception("bing图片获取失败")
-
+    if len(config.hwp_custom_bg) >0:
+        try:
+            url=random.choice(config.hwp_custom_bg)
+            if url.startswith("file:///"):
+                return await async_open_img(url[8:])
+            return Image.open(await api_get_img(url))
+        except Exception:
+            logger.exception("下载/打开自定义背景图失败")
+            
     try:
-        url=random.choice(config.ps_custom_bg)
-        if url.startswith("file:///"):
-            return await async_open_img(url[8:])
-        return Image.open(await async_request(url))
-    except Exception:
-        logger.exception("下载/打开自定义背景图失败")
+        return Image.open(await api_get_img(await bing_dayimg()))
+    except:
+        logger.exception("获取bing背景图失败")
 
 async def draw_footer(img: Image.Image, time_str: str):
     draw = ImageDraw.Draw(img)
@@ -206,7 +197,7 @@ async def draw_footer(img: Image.Image, time_str: str):
     draw.text(
         (w / 2, h - padding),
         (
-            f"{plugin_version} | "
+            f"{hwp_version} | "
             f"{version} | "
             f"{platform.python_implementation()} {platform.python_version()} | "
             f"{time_str}"

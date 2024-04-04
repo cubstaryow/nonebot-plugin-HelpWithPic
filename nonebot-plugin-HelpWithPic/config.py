@@ -3,16 +3,18 @@ from typing import List, Literal, Optional, Set, Tuple
 from nonebot import get_driver
 from pydantic import BaseModel
 
-class config_HWP(BaseModel):
+class config_hwp(BaseModel):
     superusers: Set[str] = set()
-    ps_font: Optional[str] = None
-    ps_custom_bg: List[str] = []
+    hwp_font: Optional[str] = None
+    hwp_custom_bg: List[str] = []
+    #ps_blur_radius: int = 4
+    #ps_bg_color: Tuple[int, int, int, int] = (255, 255, 255, 150)
+    #ps_mask_color: Tuple[int, int, int, int] = (255, 255, 255, 125)
     version: str = "Unknow"
-    HWP_commandstart :str = "#"
-    HWP_nickname:str ="本bot的帮助文档"
-    HWP_text:str = "你想要的,我们都没有(不是\n这是描述"
-    plugin_version:str="HelpWithPic-Beta1.0"
+    hwp_commandstart :str = "#"
+    hwp_nickname:str ="幼龙云V4的帮助文档"
+    hwp_text:str =  "你想要的,我们都没有(不是\n不知道写啥了"
+    hwp_version:str="HelpWithPic-Beta1.0"
 
-config: config_HWP = config_HWP.parse_obj(get_driver().config.dict())
-
+config: config_hwp = config_hwp.parse_obj(get_driver().config.dict())
 #本插件由 cubstaryow 编写

@@ -1,61 +1,38 @@
 from io import BytesIO
 from typing import List, Literal, Optional, cast, overload
-
+import aiohttp
 import anyio
-from httpx import AsyncClient
-from nonebot import logger
-from nonebot.internal.adapter import Bot , Event
 from PIL import Image
+from loguru import logger
 
-try:
-    from nonebot.adapters.onebot.v11 import MessageEvent as OBV11MessageEvent
-except ImportError:
-    OBV11MessageEvent = None
-
-@overload
-async def async_request(
-    url: str,
-    *args,
-    is_text: Literal[False] = False,
-    proxy: Optional[str] = None,
-    **kwargs,
-) -> bytes:
-    ...
-
-
-@overload
-async def async_request(
-    url: str,
-    *args,
-    is_text: Literal[True] = True,
-    proxy: Optional[str] = None,
-    **kwargs,
-) -> str:
-    ...
-
-
-async def async_request(url: str, *args, is_text=False, proxy=None, **kwargs):
-    async with AsyncClient(
-        proxies=proxy,
-        follow_redirects=True,
-        timeout=10,
-    ) as cli:
-        res = await cli.get(url, *args, **kwargs)
-        return res.text if is_text else res.content
 
 async def get_qq_avatar(qq) -> bytes:
-    return await async_request(f"https://q2.qlogo.cn/headimg_dl?dst_uin={qq}&spec=640")
-
+    return await api_get_img(f"https://q2.qlogo.cn/headimg_dl?dst_uin={qq}&spec=640")
 
 async def async_open_img(fp, *args, **kwargs) -> Image.Image:
     async with (await anyio.open_file(fp, "rb")) as f:
         p = BytesIO(await f.read())
     return Image.open(p, *args, **kwargs)
 
-async def extract_msg_pic(bot: Bot, event: Event) -> Optional[bytes]:
-    if OBV11MessageEvent and isinstance(event, OBV11MessageEvent):
-        if (event.reply and (img := event.reply.message["image"])) or (
-            img := event.message["image"]
-        ):
-            url = img[0].data["url"]
-            return await async_request(url)
+        
+apiurl="https://cn.bing.com"
+
+async def bing_dayimg(n : int = 1 , idx : int = 0):
+    api = apiurl + f"/HPImageArchive.aspx?n={n}&format=js&idx={idx}"
+    data = await api_get(api)
+    imgurl = apiurl + str(data.get("images",[])[0].get("url",""))
+    return imgurl
+
+async def api_get(url: str ,headers:dict={},cookies:dict={}):
+    """异步api调用,get类型
+    """
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url=url,headers=headers,cookies=cookies) as response:
+            return await response.json(content_type=None)
+
+async def api_get_img(url: str ,headers:dict={},cookies:dict={}):
+    """异步api调用,get类型 获取图片
+    """
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url=url,headers=headers,cookies=cookies) as response:
+            return await response.content.read()

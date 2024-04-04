@@ -12,7 +12,7 @@ import asyncio
 from nonebot_plugin_saa import Image, Text, MessageFactory
 
 # 你需要自己设计一个命令权限检查器！
-commandstart = config.HWP_commandstart
+commandstart = config.hwp_commandstart
 
 add_cmd = on_command(
     commandstart+"helpadd",
@@ -33,45 +33,45 @@ helppic = on_regex(
 
 
 @add_cmd.handle()
-async def HWP_rc(
+async def hwp_rc(
         #matcher: Matcher,
         data: list = CommandArg()
 ):
     cdata = str(data[0])
     cdatal = cdata.split("\n")
     if len(cdatal) < 1:
-        msg = "[HWP-E]缺失重要参数!"
+        msg = "[hwp-E]缺失重要参数!"
     else:
         if len(cdatal) < 2:
             cdatal[1] = ""
         if len(cdatal) < 3:
             cdatal[2] = "unknow"
-        ret = addHWP(
+        ret = addhwp(
             command=cdatal[0].strip(),
             text=cdatal[1].strip(),
             perm=cdatal[2].strip()
         )
         if ret:
-            msg = "[HWP-I]词条已添加"
+            msg = "[hwp-I]词条已添加"
     msg_builder = MessageFactory([
         Text(msg)
     ])
     await msg_builder.send()
 
 @del_cmd.handle()
-async def HWP_dc(
+async def hwp_dc(
     #matcher: Matcher,
     data: list = CommandArg()
         
 ):
     command = str(data[1]).strip()
-    ret = delHWP(
+    ret = delhwp(
         command=command
     )
     if ret != "NotFound":
-       msg = f"[HWP-I]词条已删除\n>{command}"
+       msg = f"[hwp-I]词条已删除\n>{command}"
     else:
-        msg = f"[HWP-E]词条未找到"
+        msg = f"[hwp-E]词条未找到"
     msg_builder = MessageFactory([
         Text(msg)
     ])
@@ -79,7 +79,7 @@ async def HWP_dc(
 
 
 @helppic.handle()
-async def HWP_mb(
+async def hwp_mb(
         bot: Bot,
         event: MessageEvent,
         #matcher: Matcher,
@@ -91,11 +91,15 @@ async def HWP_mb(
     #    logger.exception("获取消息中附带图片失败，回退到默认行为")
     user = await bot.get_stranger_info(user_id=event.self_id, no_cache=False)
     data = format_data()
-    ret = await get_help_pic(data=data, user=user, bg_arg=pic)
-    #await matcher.send(MessageSegment.image(ret))
-    msg_builder = MessageFactory([
-        Image(ret)
-    ])
+    #try:
+    if 1 :
+        ret = await get_help_pic(data=data,user=user,bg_arg=pic)
+        msg_builder = MessageFactory([
+            Image(ret)
+        ])
+    #except Exception:
+    #    msg_builder = MessageFactory([
+    #        Text("[hwp-E]出错了,请查看控制台")])
     await msg_builder.send()
     await helppic.finish()
 
