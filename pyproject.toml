@@ -17,7 +17,7 @@ classifiers = [
 
 dependencies = [
   "httpx",
-  "nonebot_plugin_saa",
+  "nonebot_plugin_send_anything_anywhere",
   "pil_utils",
   "pillow"
 ]
