@@ -3,7 +3,7 @@ from pathlib import Path
 #from nonebot import get_driver
 import os
 import json
-from loguru import logger
+from nonebot.log import logger
 #driver = get_driver()
 # 插件数据代理
 
