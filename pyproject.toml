@@ -16,8 +16,10 @@ classifiers = [
 ]
 
 dependencies = [
+  "nonebot-adapter-onebot"
+  "nonebot2",
   "httpx",
-  "nonebot_plugin_send_anything_anywhere",
+  "nonebot-plugin-send-anything-anywhere",
   "pil_utils",
   "pillow"
 ]
