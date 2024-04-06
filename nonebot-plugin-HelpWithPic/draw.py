@@ -8,7 +8,6 @@ from pil_utils import BuildImage
 from pil_utils.fonts import get_proper_font
 import random
 from .draw_contect import *
-import requests
 from .config import config
 
 GRAY_BG_COLOR: str = "#aaaaaaaa"

@@ -1,9 +1,7 @@
 from io import BytesIO
-from typing import List, Literal, Optional, cast, overload
 import aiohttp
 import anyio
 from PIL import Image
-from loguru import logger
 
 
 async def get_qq_avatar(qq) -> bytes:

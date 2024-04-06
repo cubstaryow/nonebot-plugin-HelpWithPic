@@ -4,10 +4,9 @@ from nonebot.params import CommandArg
 from nonebot.permission import SUPERUSER
 from nonebot import on_command , on_regex
 from .draw import get_help_pic
-from nonebot.matcher import Matcher
 from .config import config
 from nonebot.adapters.onebot.v11 import (
-    Bot, MessageEvent, MessageSegment, GroupMessageEvent, Message
+    Bot, MessageEvent
 )
 import asyncio
 from nonebot_plugin_saa import Image, Text, MessageFactory

@@ -1,7 +1,3 @@
-from pathlib import Path
-import os
-import json
-from nonebot.log import logger
 from .plugins_data import initdata,wdata,rdata
 jsonname = "HWP.json"
 bashdata = {
