@@ -29,6 +29,7 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 此插件部分代码参考 nonebot-plugin-picstatus (制图与部分资源获取)
 
 目前只支持 onebotV11 !!!!
+暂时还未上传nonebot商店 将在正式版尝试上传.
 
 ## 📖 介绍
 
