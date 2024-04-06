@@ -40,7 +40,7 @@ async def HWP_rc(
     cdata = str(data[0])
     cdatal = cdata.split("\n")
     if len(cdatal) < 1:
-        msg = "[hwp-E]缺失重要参数!"
+        msg = "[HWP-E]缺失重要参数!"
     else:
         if len(cdatal) < 2:
             cdatal[1] = ""
@@ -52,7 +52,7 @@ async def HWP_rc(
             perm=cdatal[2].strip()
         )
         if ret:
-            msg = "[hwp-I]词条已添加"
+            msg = "[HWP-I]词条已添加"
     msg_builder = MessageFactory([
         Text(msg)
     ])
