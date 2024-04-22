@@ -16,7 +16,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "nonebot-adapter-onebot"
+  "nonebot-adapter-onebot",
   "nonebot2",
   "httpx",
   "aiohttp",
