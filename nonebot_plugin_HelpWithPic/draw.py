@@ -2,8 +2,9 @@ import asyncio
 import math
 import platform
 import time
-from typing import Union
+from typing import Optional, Union
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from loguru import logger
 from pil_utils import BuildImage
 from pil_utils.fonts import get_proper_font
 import random
