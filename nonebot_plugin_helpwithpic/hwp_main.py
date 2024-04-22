@@ -3,13 +3,13 @@ from .jsondata import addHWP, delHWP, format_data
 from nonebot.params import CommandArg
 from nonebot.permission import SUPERUSER
 from nonebot import on_command , on_regex
+from nonebot.matcher import Matcher
 from .draw import get_help_pic
 from .config import config
 from nonebot.adapters.onebot.v11 import (
-    Bot, MessageEvent
+    Bot, MessageEvent , MessageSegment
 )
 import asyncio
-from nonebot_plugin_saa import Image, Text, MessageFactory
 
 # 你需要自己设计一个命令权限检查器！
 commandstart = config.hwp_commandstart
@@ -32,7 +32,7 @@ helppic = on_regex(
 
 @add_cmd.handle()
 async def HWP_rc(
-        #matcher: Matcher,
+        matcher: Matcher,
         data: list = CommandArg()
 ):
     cdata = str(data[0])
@@ -51,14 +51,11 @@ async def HWP_rc(
         )
         if ret:
             msg = "[HWP-I]词条已添加"
-    msg_builder = MessageFactory([
-        Text(msg)
-    ])
-    await msg_builder.send()
+    await matcher.send(msg)
 
 @del_cmd.handle()
 async def HWP_dc(
-    #matcher: Matcher,
+    matcher: Matcher,
     data: list = CommandArg()
         
 ):
@@ -70,17 +67,14 @@ async def HWP_dc(
        msg = f"[HWP-I]词条已删除\n>{command}"
     else:
         msg = f"[HWP-E]词条未找到"
-    msg_builder = MessageFactory([
-        Text(msg)
-    ])
-    await msg_builder.send()
+    await matcher.send()
 
 
 @helppic.handle()
 async def HWP_mb(
         bot: Bot,
         event: MessageEvent,
-        #matcher: Matcher,
+        matcher: Matcher
 ):
     pic = None
     # try :
@@ -92,13 +86,10 @@ async def HWP_mb(
     try:
 
         ret = await get_help_pic(data=data,user=user,bg_arg=pic)
-        msg_builder = MessageFactory([
-            Image(ret)
-        ])
-    except Exception:
-        msg_builder = MessageFactory([
-            Text("[HWP-E]出错了,请查看控制台")])
-    await msg_builder.send()
-    await helppic.finish()
+        msg = MessageSegment.image(ret)
+    except Exception as e:
+        msg = f"[HWP-E]出错了\n{e}"
+
+    await matcher.send(msg)
 
 #本插件由 cubstaryow 编写
