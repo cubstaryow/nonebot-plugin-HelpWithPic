@@ -26,9 +26,8 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 ## ⚠ 注意
 因为我是小白,我只能以我自己的方式写我觉得可能挺好用的插件()
 所以部分代码逻辑可能不是很好
-此插件部分代码参考 nonebot-plugin-picstatus (制图与部分资源获取)
 
-目前只支持 onebotV11 !!!!
+目前只支持 onebotV11
 暂时还未上传nonebot商店 将在正式版尝试上传.
 
 ## 📖 介绍
@@ -83,14 +82,13 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 大小写不影响配置)
 
 ### ⚠ 注意
- pydantic 版本可能会导致 HWP_custom_bg 项目报错!(单引号改成双引号可能可以解决)
+部分 pydantic 版本可能会导致 HWP_custom_bg 项目报错!
 
- 经测试 1.10.12 不会导致报错
 
 | 配置项 | 必填 | 默认值 | 说明 |
 |:-----:|:----:|:----:|:----:|
 | HWP_font | 否 | None | 使用的字体文件 |
-| HWP_custom_bg | 否 | [] | 图片背景,需要以file:///开头,比如['file:///./data/draw/default_bg1.png']此处使用相对路径,默认使用bing壁纸 |
+| HWP_custom_bg | 否 | [] | 图片背景,需要以file:///开头,比如["file:///./data/draw/default_bg1.png"]此处使用相对路径,默认使用bing壁纸 |
 | version | 否 | "Unknow" | 可以填你的bot版本 |
 | HWP_commandstart | 否 | "#" | 自定义命令头 |
 | HWP_nickname | 否 | "本bot的帮助文档" | 标题 |
