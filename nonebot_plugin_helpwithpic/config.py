@@ -12,6 +12,7 @@ class config_hwp(BaseModel):
     hwp_nickname:str ="本BOT的帮助文档"
     hwp_text:str =  "你想要的,我们都没有(不是\n不知道写啥了"
     hwp_version:str="HelpWithPic-Beta1.4"
+    cubplugin_datadir:str=""
 
 config: config_hwp = config_hwp.parse_obj(get_driver().config.dict())
 #本插件由 cubstaryow 编写

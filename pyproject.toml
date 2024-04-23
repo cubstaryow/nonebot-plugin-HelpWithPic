@@ -16,8 +16,9 @@ classifiers = [
 ]
 
 dependencies = [
-  "nonebot-adapter-onebot",
   "nonebot2",
+  "nonebot-adapter-onebot",
+  "nonebot-plugin-localstore",
   "aiohttp",
   "pil_utils",
   "pillow"
