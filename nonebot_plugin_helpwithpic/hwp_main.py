@@ -36,24 +36,30 @@ helppic = on_regex(
 async def HWP_rc(
         matcher: Matcher,
         data: list = CommandArg()
-):
-    cdata = str(data[0])
-    cdatal = cdata.split(config.hwp_addseparator)
-    if len(cdatal) < 1:
-        msg = "[HWP-E]缺失重要参数!"
-    else:
-        if len(cdatal) < 2:
-            cdatal.append("")
-        if len(cdatal) < 3:
-            cdatal.append("unknow")
-        ret = addHWP(
-            command=cdatal[0].strip(),
-            text=cdatal[1].strip(),
-            perm=cdatal[2].strip()
-        )
-        if ret:
-            msg = "[HWP-I]词条已添加"
-    await matcher.send(msg)
+):  
+    try:
+        cdata = str(data[0])
+        cdatal = cdata.split(config.hwp_addseparator)
+        if len(cdatal) < 1:
+            msg = "[HWP-E]缺失重要参数!"
+        else:
+            if len(cdatal) < 2:
+                cdatal.append("")
+            if len(cdatal) < 3:
+                cdatal.append("unknow")
+            ret = addHWP(
+                command=cdatal[0].strip(),
+                text=cdatal[1].strip(),
+                perm=cdatal[2].strip()
+            )
+            if ret:
+                msg = "[HWP-I]词条已添加"
+        await matcher.send(msg)
+    except Exception as e:
+        msg = f"[HWP-E]出错了\n{e}"
+        await matcher.send(msg)
+        raise e
+    
 
 @del_cmd.handle()
 async def HWP_dc(
@@ -61,15 +67,20 @@ async def HWP_dc(
     data: list = CommandArg()
         
 ):
-    command = str(data[0]).strip()
-    ret = delHWP(
-        command=command
-    )
-    if ret != "NotFound":
-       msg = f"[HWP-I]词条已删除\n>{command}"
-    else:
-        msg = f"[HWP-E]词条未找到"
-    await matcher.send(msg)
+    try:
+        command = str(data[0]).strip()
+        ret = delHWP(
+            command=command
+        )
+        if ret != "NotFound":
+           msg = f"[HWP-I]词条已删除\n>{command}"
+        else:
+            msg = f"[HWP-E]词条未找到"
+        await matcher.send(msg)
+    except Exception as e:
+        msg = f"[HWP-E]出错了\n{e}"
+        await matcher.send(msg)
+        raise e
 
 
 @helppic.handle()
@@ -83,17 +94,18 @@ async def HWP_mb(
     #    pic = await extract_msg_pic(bot, event)
     # except Exception:
     #    logger.exception("获取消息中附带图片失败，回退到默认行为")
-    user = await bot.get_stranger_info(user_id=event.self_id, no_cache=False)
-    #permlist.index("u")
-    data = format_data( await checkperm(bot=bot,event=event))
     try:
-
+        user = await bot.get_stranger_info(user_id=event.self_id, no_cache=False)
+        data = format_data( await checkperm(bot=bot,event=event))
         ret = await get_help_pic(data=data,user=user,bg_arg=pic)
         msg = MessageSegment.image(ret)
+        await matcher.send(msg)
     except Exception as e:
         msg = f"[HWP-E]出错了\n{e}"
+        await matcher.send(msg)
+        raise e
 
-    await matcher.send(msg)
+    
 
 async def checkperm(bot:Bot,event: MessageEvent):
     if await SUPERUSER(bot,event):
