@@ -38,7 +38,7 @@ async def HWP_rc(
         data: list = CommandArg()
 ):
     cdata = str(data[0])
-    cdatal = cdata.split("\n")
+    cdatal = cdata.split(config.hwp_addseparator)
     if len(cdatal) < 1:
         msg = "[HWP-E]缺失重要参数!"
     else:
