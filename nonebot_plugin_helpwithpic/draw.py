@@ -94,7 +94,7 @@ async def draw_header(user) -> Image.Image:
         f"{cs}help / {cs}帮助","获取本帮助页",300
         )
     bbb = await make_command_card(
-        f"{cs}helpadd \\n[命令]\\n[描述]\\n[触发权限]","为本帮助页添加一条命令",700,perm="admin"
+        f"{cs}helpadd [命令]</>[描述]</>[触发权限]","为本帮助页添加一条命令,</>默认为换行",750,perm="admin"
         )
     ccc = await make_command_card(
         f"{cs}helpdel [命令]","删除一条命令",400,perm="admin"
@@ -128,11 +128,7 @@ async def command_pic(data):
             sidew +=140
     return bg
 
-permcolor={
-    "user":["#48dbfbc0","#0abde3"],
-    "admin":["#ff9ff3c0","#f368e0"],
-    "root":["#ff6b6bc0","#ee5253"]
-}
+from .basedata import permcolor
 
 async def make_command_card(
     text:str , 

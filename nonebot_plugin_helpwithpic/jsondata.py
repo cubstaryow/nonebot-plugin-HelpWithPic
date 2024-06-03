@@ -29,13 +29,16 @@ def delHWP(
     a = temp["cmdlist"].pop(command,"NotFound")
     wdata(jsonname,temp)
     return a
-    
-def format_data():
+
+permlist = ['unkown','user','admin','root']
+def format_data(perm:str="user"):
     temp = rdata(jsonname)
+    p = permlist.index(perm)+1
     cmdlist = temp.get("cmdlist",{})
     data = []
     for key , values in cmdlist.items():
-        data.append(
+        if values["perm"] in permlist[:p]:
+            data.append(
             [ key , values["text"] , values["perm"] ]
         )
     return data

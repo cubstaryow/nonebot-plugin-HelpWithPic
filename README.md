@@ -95,6 +95,8 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 | HWP_text | 否 | "你想要的,我们都没有(不是\n这是描述" | 描述 |
 | HWP_version | 否 | "HelpWithPic-Betaxxx"  | 插件版本 |
 | cubplugin_datadir | 否 | ""  | 插件数据文件夹 |
+| hwp_addseparator | 否 | "\n"  | helpadd的命令分割符,默认为回车 |
+
 
 ## 🎉 使用
 ### 指令表

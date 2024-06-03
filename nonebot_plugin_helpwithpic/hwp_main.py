@@ -9,9 +9,11 @@ from .config import config
 from nonebot.adapters.onebot.v11 import (
     Bot, MessageEvent , MessageSegment
 )
+from nonebot.adapters.onebot.v11 import (
+    GROUP_ADMIN , GROUP_OWNER
+)
 import asyncio
 
-# 你需要自己设计一个命令权限检查器！
 commandstart = config.hwp_commandstart
 
 add_cmd = on_command(
@@ -41,9 +43,9 @@ async def HWP_rc(
         msg = "[HWP-E]缺失重要参数!"
     else:
         if len(cdatal) < 2:
-            cdatal[1] = ""
+            cdatal.append("")
         if len(cdatal) < 3:
-            cdatal[2] = "unknow"
+            cdatal.append("unknow")
         ret = addHWP(
             command=cdatal[0].strip(),
             text=cdatal[1].strip(),
@@ -59,7 +61,7 @@ async def HWP_dc(
     data: list = CommandArg()
         
 ):
-    command = str(data[1]).strip()
+    command = str(data[0]).strip()
     ret = delHWP(
         command=command
     )
@@ -67,7 +69,7 @@ async def HWP_dc(
        msg = f"[HWP-I]词条已删除\n>{command}"
     else:
         msg = f"[HWP-E]词条未找到"
-    await matcher.send()
+    await matcher.send(msg)
 
 
 @helppic.handle()
@@ -82,7 +84,8 @@ async def HWP_mb(
     # except Exception:
     #    logger.exception("获取消息中附带图片失败，回退到默认行为")
     user = await bot.get_stranger_info(user_id=event.self_id, no_cache=False)
-    data = format_data()
+    #permlist.index("u")
+    data = format_data( await checkperm(bot=bot,event=event))
     try:
 
         ret = await get_help_pic(data=data,user=user,bg_arg=pic)
@@ -91,5 +94,15 @@ async def HWP_mb(
         msg = f"[HWP-E]出错了\n{e}"
 
     await matcher.send(msg)
+
+async def checkperm(bot:Bot,event: MessageEvent):
+    if await SUPERUSER(bot,event):
+        return 'root'
+    if await GROUP_OWNER(bot,event):
+        return 'admin'
+    if await GROUP_ADMIN(bot,event):
+        return 'admin'
+    return 'user'
+
 
 #本插件由 cubstaryow 编写
