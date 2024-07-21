@@ -13,7 +13,7 @@ async def async_open_img(fp, *args, **kwargs) -> Image.Image:
     return Image.open(p, *args, **kwargs)
 
         
-apiurl="https://cn.bing.com"
+apiurl="https://www.bing.com"
 
 async def bing_dayimg(n : int = 1 , idx : int = 0):
     api = apiurl + f"/HPImageArchive.aspx?n={n}&format=js&idx={idx}"
