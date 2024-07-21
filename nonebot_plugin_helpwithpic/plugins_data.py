@@ -21,7 +21,6 @@ else:
     if data_dir.is_dir():
         logger.opt(colors=True).debug(f"[plugin_data]\033[0m根目录正常-\<{path_name}\>")
     else:
-        #os.mkdir(path_name)
         os.mkdir(data_dir)
         logger.opt(colors=True).debug(f"[plugin_data]\033[0m初始化根目录\<{path_name}\>")
 
