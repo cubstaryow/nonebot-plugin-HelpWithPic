@@ -184,6 +184,9 @@ async def get_bg(pic: Optional[Union[bytes, Image.Image]] = None) -> Image.Image
         return Image.open(await api_get_img(await bing_dayimg()))
     except:
         logger.exception("获取bing背景图失败")
+    
+    logger.exception("background load failed !")
+    return Image.new("RGB", (100,100), "#ffffff")
 
 async def draw_footer(img: Image.Image, time_str: str):
     draw = ImageDraw.Draw(img)
