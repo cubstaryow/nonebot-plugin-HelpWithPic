@@ -23,7 +23,7 @@ text =  config.hwp_text
 cs = config.hwp_commandstart
 hwp_version = config.hwp_version
 
-version = config.version
+version = config.hwp_bot_version
 
 def get_font(size: int):
     return ImageFont.truetype(FONT_PATH, size)

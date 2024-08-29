@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-helpwithpic"
-version = "1.6"
+version = "1.6.1"
 description = "nonebot插件-动态帮助图片制作"
 readme = "README.md"
 requires-python = ">=3.10"

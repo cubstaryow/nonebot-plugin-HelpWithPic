@@ -1,6 +1,6 @@
 
 from .jsondata import addHWP, delHWP, format_data
-from nonebot.params import CommandArg
+from nonebot.params import  RegexGroup
 from nonebot.permission import SUPERUSER
 from nonebot import on_command , on_regex
 from nonebot.matcher import Matcher
@@ -13,17 +13,17 @@ from nonebot.adapters.onebot.v11 import (
     GROUP_ADMIN , GROUP_OWNER
 )
 import asyncio
-
+fg = config.hwp_addseparator
 commandstart = config.hwp_commandstart
 
-add_cmd = on_command(
-    commandstart+"helpadd",
-    aliases={ commandstart+"菜单添加" } ,
+#默认以换行分割，故使用不会匹配换行的.*
+add_cmd = on_regex(
+    rf"^{commandstart}helpadd[\s*](.*){fg}+(.*){fg}+(.*)",
     permission=SUPERUSER, priority=20
 )
-del_cmd = on_command(
-    commandstart+"helpdel",
-    aliases={ commandstart+"菜单删除"} ,
+
+del_cmd = on_regex(
+    rf"^{commandstart}helpdel[\s*]+(.*)",
     permission=SUPERUSER, priority=20
 )
 helppic = on_regex(
@@ -35,22 +35,20 @@ helppic = on_regex(
 @add_cmd.handle()
 async def HWP_rc(
         matcher: Matcher,
-        data: list = CommandArg()
+        data: list = RegexGroup()
 ):  
     try:
-        cdata = str(data[0])
-        cdatal = cdata.split(config.hwp_addseparator)
-        if len(cdatal) < 1:
+        if len(data) < 1:
             msg = "[HWP-E]缺失重要参数!"
         else:
-            if len(cdatal) < 2:
-                cdatal.append("")
-            if len(cdatal) < 3:
-                cdatal.append("unknow")
+            if len(data) < 2:
+                data.append("")
+            if len(data) < 3:
+                data.append("unknow")
             ret = addHWP(
-                command=cdatal[0].strip(),
-                text=cdatal[1].strip(),
-                perm=cdatal[2].strip()
+                command=data[0].strip(),
+                text=data[1].strip(),
+                perm=data[2].strip()
             )
             if ret:
                 msg = "[HWP-I]词条已添加"
@@ -64,7 +62,7 @@ async def HWP_rc(
 @del_cmd.handle()
 async def HWP_dc(
     matcher: Matcher,
-    data: list = CommandArg()
+    data: list = RegexGroup()
         
 ):
     try:

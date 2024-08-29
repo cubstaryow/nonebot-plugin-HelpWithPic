@@ -89,7 +89,7 @@ _✨ nonebot插件-动态帮助图片制作 ✨_
 |:-----:|:----:|:----:|:----:|
 | HWP_font | 否 | None | 使用的字体文件 |
 | HWP_custom_bg | 否 | [] | 图片背景,需要以file:///开头,比如["file:///./data/draw/default_bg1.png"]此处使用相对路径,默认使用bing壁纸 |
-| version | 否 | "Unknow" | 可以填你的bot版本 |
+| HWP_bot_version | 否 | "Unknow" | 可以填你的bot版本 |
 | HWP_commandstart | 否 | "#" | 自定义命令头 |
 | HWP_nickname | 否 | "本bot的帮助文档" | 标题 |
 | HWP_text | 否 | "你想要的,我们都没有(不是\n这是描述" | 描述 |
