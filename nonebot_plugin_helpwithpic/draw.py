@@ -10,7 +10,7 @@ from pil_utils.fonts import get_proper_font
 import random
 from .draw_contect import *
 from .config import config
-
+import html
 GRAY_BG_COLOR: str = "#aaaaaaaa"
 WHITE_BG_COLOR = (255, 255, 255, 150)
 WHITE_MASK_COLOR = (255, 255, 255, 125)
@@ -22,7 +22,7 @@ nick = config.hwp_nickname
 text =  config.hwp_text
 cs = config.hwp_commandstart
 hwp_version = config.hwp_version
-
+hwp_txt_halign = config.hwp_txt_halign
 version = config.hwp_bot_version
 
 def get_font(size: int):
@@ -146,7 +146,7 @@ async def make_command_card(
     ImageDraw.Draw(command_card).polygon([(0,0),(70,0),(0,140)],fill=color[1])
     BuildImage(command_card).draw_text(
         (60, 0, long*0.95, 60),
-        text,
+        html.unescape(text),
         max_fontsize=55,
         halign=chalign,
         valign="bottom",
@@ -154,9 +154,9 @@ async def make_command_card(
     )
     BuildImage(command_card).draw_text(
         (40, 60, long*0.9, 100),
-        text2,
+        html.unescape(text2),
         max_fontsize=35,
-        halign="left",
+        halign=hwp_txt_halign,
         valign="bottom",
         fontname=FONT_PATH,
     )

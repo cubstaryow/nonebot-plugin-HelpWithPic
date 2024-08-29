@@ -14,6 +14,7 @@ class config_hwp(BaseModel):
     hwp_version:str="HelpWithPic-Beta1.6.1"
     cubplugin_datadir:str=""
     hwp_addseparator:str="\n"
+    hwp_txt_halign:str="left"
 
 config: config_hwp = config_hwp.parse_obj(get_driver().config.dict())
 #本插件由 cubstaryow 编写
