@@ -94,10 +94,10 @@ async def draw_header(user) -> Image.Image:
         f"{cs}help / {cs}帮助","获取本帮助页",300
         )
     bbb = await make_command_card(
-        f"{cs}helpadd [命令]</>[描述]</>[触发权限]","为本帮助页添加一条命令,</>默认为换行",750,perm="admin"
+        f"{cs}helpadd [命令]</>[描述]</>[触发权限]","为本帮助页添加一条命令,</>默认为换行",750,perm="root"
         )
     ccc = await make_command_card(
-        f"{cs}helpdel [命令]","删除一条命令",400,perm="admin"
+        f"{cs}helpdel [命令]","删除一条命令",400,perm="root"
         )
     unkown = await make_command_card("unkown","",250 ,"unkown","center")
     user = await make_command_card("user","",250 ,"user","center")
