@@ -16,7 +16,7 @@ GRAY_BG_COLOR: str = "#aaaaaaaa"
 WHITE_BG_COLOR = (255, 255, 255, 150)
 WHITE_MASK_COLOR = (255, 255, 255, 125)
 
-FONT_PATH =  config.hwp_font or str(get_proper_font("国").path.resolve())
+FONT_PATH = [config.hwp_font or str(get_proper_font("国").path.resolve())]
 #"./util/resource/font/Rajdhani-zihun-Medium.ttf" or
 
 nick = config.hwp_nickname
@@ -27,7 +27,7 @@ hwp_txt_halign = config.hwp_txt_halign
 version = config.hwp_bot_version
 
 def get_font(size: int):
-    return ImageFont.truetype(FONT_PATH, size)
+    return ImageFont.truetype(FONT_PATH[0], size)
 
 font_size_add = 0   #5
 font_20 = get_font(20 + font_size_add)
@@ -70,7 +70,7 @@ async def draw_header(user) -> Image.Image:
         max_fontsize=60,
         halign="left",
         valign="bottom",
-        fontname=FONT_PATH,
+        font_families=FONT_PATH,
     )
     # 详细信息
     BuildImage(bg_main).draw_text(
@@ -79,7 +79,7 @@ async def draw_header(user) -> Image.Image:
         max_fontsize=40,
         halign="left",
         valign="top",
-        fontname=FONT_PATH,
+        font_families=FONT_PATH,
     )
 
     # 标题与详细信息的分隔线
@@ -151,7 +151,7 @@ async def make_command_card(
         max_fontsize=55,
         halign=chalign,
         valign="bottom",
-        fontname=FONT_PATH,
+        font_families=FONT_PATH,
     )
     BuildImage(command_card).draw_text(
         (40, 60, long*0.9, 100),
@@ -159,7 +159,7 @@ async def make_command_card(
         max_fontsize=35,
         halign=hwp_txt_halign,
         valign="bottom",
-        fontname=FONT_PATH,
+        font_families=FONT_PATH,
     )
     
     bg_mask = Image.new("RGBA", (long, 100), "#ffffff00")
